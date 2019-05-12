@@ -1,4 +1,4 @@
-package me.mqueiroz.picpay.di
+package me.mqueiroz.picpay.di.modules
 
 import dagger.Module
 import dagger.Binds
