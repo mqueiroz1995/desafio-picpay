@@ -3,6 +3,7 @@ package me.mqueiroz.picpay.di.components
 import android.content.Context
 import dagger.BindsInstance
 import dagger.Component
+import me.mqueiroz.picpay.di.modules.NetworkModule
 import me.mqueiroz.picpay.di.modules.RepositoryModule
 import me.mqueiroz.picpay.di.modules.RxModule
 import me.mqueiroz.picpay.ui.home.HomeViewModel
@@ -13,6 +14,7 @@ import javax.inject.Singleton
 @Component(
     modules = [
         RepositoryModule::class,
+        NetworkModule::class,
         RxModule::class
     ]
 )

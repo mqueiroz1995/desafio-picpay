@@ -2,8 +2,8 @@ package me.mqueiroz.picpay
 
 import android.app.Application
 import me.mqueiroz.picpay.di.components.ApplicationComponent
-import me.mqueiroz.picpay.di.DaggerApplicationComponent
 import me.mqueiroz.picpay.di.DaggerComponentProvider
+import me.mqueiroz.picpay.di.components.DaggerApplicationComponent
 
 class MyApplication : Application(), DaggerComponentProvider {
 
