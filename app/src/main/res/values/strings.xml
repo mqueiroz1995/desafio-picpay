@@ -12,4 +12,5 @@
     <string name="payment_edit_card_button">Editar</string>
     <string name="payment_button">Pagar</string>
     <string name="payment_value_hint">0,00</string>
+    <string name="payment_currency">R$</string>
 </resources>
