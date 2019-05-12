@@ -6,6 +6,7 @@ import dagger.Component
 import me.mqueiroz.picpay.di.modules.NetworkModule
 import me.mqueiroz.picpay.di.modules.RepositoryModule
 import me.mqueiroz.picpay.di.modules.RxModule
+import me.mqueiroz.picpay.ui.SharedViewModel
 import me.mqueiroz.picpay.ui.card.register.CardRegisterViewModel
 import me.mqueiroz.picpay.ui.home.HomeViewModel
 import me.mqueiroz.picpay.ui.payment.PaymentViewModel
@@ -14,11 +15,11 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(
-    modules = [
-        RepositoryModule::class,
-        NetworkModule::class,
-        RxModule::class
-    ]
+        modules = [
+            RepositoryModule::class,
+            NetworkModule::class,
+            RxModule::class
+        ]
 )
 interface ApplicationComponent {
 
@@ -35,4 +36,6 @@ interface ApplicationComponent {
     fun cardRegisterViewModelFactory(): ViewModelFactory<CardRegisterViewModel>
 
     fun paymentViewModelFactory(): ViewModelFactory<PaymentViewModel>
+
+    fun sharedViewModelFactory(): ViewModelFactory<SharedViewModel>
 }
