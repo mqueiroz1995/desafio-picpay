@@ -6,5 +6,5 @@ import me.mqueiroz.picpay.utils.StringResource
 sealed class HomeFragmentState {
     object Loading : HomeFragmentState()
     data class Error(val message: StringResource = StringResource.defaultError()) : HomeFragmentState()
-    data class Loaded(val repos: List<User>) : HomeFragmentState()
+    data class Loaded(val users: List<User>) : HomeFragmentState()
 }
