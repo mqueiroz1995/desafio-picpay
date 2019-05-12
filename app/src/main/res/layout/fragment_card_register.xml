@@ -75,6 +75,28 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/card_register_expiration_wrapper"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginRight="12dp"
+        android:theme="@style/EditTextWrapper"
+        app:layout_constraintEnd_toStartOf="@+id/card_register_cvv_wrapper"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/card_register_cvv_wrapper">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/card_register_expiration_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="5"
+            android:hint="@string/card_register_expiration_hint" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/card_register_cvv_wrapper"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -93,28 +115,8 @@
             android:id="@+id/card_register_cvv_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:ems="3"
             android:hint="@string/card_register_cvv_hint" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/card_register_expiration_wrapper"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginEnd="12dp"
-        android:layout_marginRight="12dp"
-        android:theme="@style/EditTextWrapper"
-        app:layout_constraintEnd_toStartOf="@+id/card_register_cvv_wrapper"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/card_register_cvv_wrapper">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/card_register_expiration_input"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/card_register_expiration_hint" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button

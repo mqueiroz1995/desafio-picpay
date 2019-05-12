@@ -5,7 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import kotlinx.android.synthetic.main.fragment_card_register.*
+import androidx.navigation.fragment.findNavController
+import kotlinx.android.synthetic.main.fragment_card_register_priming.*
 import me.mqueiroz.picpay.R
 
 class CardRegisterPrimingFragment : Fragment() {
@@ -19,6 +20,10 @@ class CardRegisterPrimingFragment : Fragment() {
 
         toolbar.setNavigationOnClickListener {
             activity?.onBackPressed()
+        }
+
+        card_register_priming_button.setOnClickListener {
+            findNavController().navigate(R.id.action_cardRegisterPrimingFragment_to_cardRegisterFragment)
         }
     }
 }

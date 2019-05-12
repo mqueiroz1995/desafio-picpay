@@ -1,11 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/paymentFragment">
 
     <fragment
         android:id="@+id/homeFragment"
         android:name="me.mqueiroz.picpay.ui.home.HomeFragment"
-        android:label="HomeFragment" />
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_cardRegisterPrimingFragment"
+            app:destination="@id/cardRegisterPrimingFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/cardRegisterFragment"
+        android:name="me.mqueiroz.picpay.ui.card.register.CardRegisterFragment"
+        android:label="CardRegisterFragment"
+        tools:layout="@layout/fragment_card_register" >
+        <action
+            android:id="@+id/action_cardRegisterFragment_to_paymentFragment"
+            app:destination="@id/paymentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cardRegisterPrimingFragment"
+        android:name="me.mqueiroz.picpay.ui.card.priming.CardRegisterPrimingFragment"
+        android:label="CardRegisterPrimingFragment"
+        tools:layout="@layout/fragment_card_register_priming">
+        <action
+            android:id="@+id/action_cardRegisterPrimingFragment_to_cardRegisterFragment"
+            app:destination="@id/cardRegisterFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/paymentFragment"
+        android:name="me.mqueiroz.picpay.ui.payment.PaymentFragment"
+        android:label="PaymentFragment"
+        tools:layout="@layout/fragment_payment" >
+        <action
+            android:id="@+id/action_paymentFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+
 </navigation>
