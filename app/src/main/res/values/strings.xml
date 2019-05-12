@@ -9,4 +9,7 @@
     <string name="card_register_priming_title">Cadastre um cartão\nde crédito</string>
     <string name="card_register_priming_content">Para fazer pagamentos para outras\npessoas você precisa cadastrar\num cartão de crédito pessoal.</string>
     <string name="card_register_priming_button">Cadastrar cartão</string>
+    <string name="payment_edit_card_button">Editar</string>
+    <string name="payment_button">Pagar</string>
+    <string name="payment_value_hint">0,00</string>
 </resources>
