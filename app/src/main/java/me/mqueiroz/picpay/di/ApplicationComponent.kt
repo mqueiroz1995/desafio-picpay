@@ -8,7 +8,12 @@ import me.mqueiroz.picpay.utils.ViewModelFactory
 import javax.inject.Singleton
 
 @Singleton
-@Component
+@Component(
+    modules = [
+        RepositoryModule::class,
+        RxModule::class
+    ]
+)
 interface ApplicationComponent {
 
     @Component.Builder

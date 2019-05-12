@@ -13,7 +13,8 @@ import me.mqueiroz.picpay.di.injector
 class HomeFragment : Fragment() {
 
     private val viewModel: HomeViewModel by lazy {
-        ViewModelProviders.of(this, injector.homeViewModelFactory())
+        ViewModelProviders
+            .of(this, injector.homeViewModelFactory())
             .get(HomeViewModel::class.java)
     }
 
@@ -23,7 +24,5 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        textView.text = viewModel.text
     }
 }
