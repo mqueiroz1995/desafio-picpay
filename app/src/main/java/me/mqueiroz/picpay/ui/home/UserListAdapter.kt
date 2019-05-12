@@ -5,8 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import me.mqueiroz.picpay.R
 import me.mqueiroz.picpay.common.entities.User
+import me.mqueiroz.picpay.utils.SingleLiveEvent
 
 class UserListAdapter : RecyclerView.Adapter<UserListItemViewHolder>() {
+
+    val onItemClickListener = SingleLiveEvent<User>()
 
     var users = emptyList<User>()
         set(value) {
@@ -18,7 +21,7 @@ class UserListAdapter : RecyclerView.Adapter<UserListItemViewHolder>() {
         val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.list_item_user, parent, false)
 
-        return UserListItemViewHolder(view)
+        return UserListItemViewHolder(view, onItemClickListener)
     }
 
     override fun onBindViewHolder(holder: UserListItemViewHolder, position: Int) {
