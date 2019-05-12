@@ -7,14 +7,14 @@ import com.squareup.moshi.JsonClass
 data class Card(
 
         @Json(name = "cvv")
-        val cvv: Int? = null,
+        val cvv: Int,
 
         @Json(name = "card_number")
-        val cardNumber: String? = null,
+        val cardNumber: String,
 
         @Json(name = "expiry_date")
-        val expiryDate: String? = null,
+        val expiryDate: String,
 
         @Json(name = "value")
-        val value: Double? = null
+        val value: Double
 )
