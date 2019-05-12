@@ -1,7 +1,8 @@
-package me.mqueiroz.picpay
+package me.mqueiroz.picpay.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import me.mqueiroz.picpay.R
 
 class MainActivity : AppCompatActivity() {
 

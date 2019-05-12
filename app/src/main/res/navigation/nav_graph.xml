@@ -6,6 +6,6 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="me.mqueiroz.picpay.HomeFragment"
+        android:name="me.mqueiroz.picpay.ui.home.HomeFragment"
         android:label="HomeFragment" />
 </navigation>
