@@ -49,9 +49,6 @@ class HomeFragment : Fragment() {
 
         val layoutManager = LinearLayoutManager(context)
         recyclerView.layoutManager = layoutManager
-
-        val dividerItemDecoration = DividerItemDecoration(recyclerView.context, layoutManager.orientation)
-        recyclerView.addItemDecoration(dividerItemDecoration)
     }
 
     private fun bindViewModel() {
