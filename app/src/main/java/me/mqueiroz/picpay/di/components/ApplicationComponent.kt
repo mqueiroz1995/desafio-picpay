@@ -6,6 +6,7 @@ import dagger.Component
 import me.mqueiroz.picpay.di.modules.NetworkModule
 import me.mqueiroz.picpay.di.modules.RepositoryModule
 import me.mqueiroz.picpay.di.modules.RxModule
+import me.mqueiroz.picpay.ui.card.register.CardRegisterViewModel
 import me.mqueiroz.picpay.ui.home.HomeViewModel
 import me.mqueiroz.picpay.utils.ViewModelFactory
 import javax.inject.Singleton
@@ -29,4 +30,6 @@ interface ApplicationComponent {
     }
 
     fun homeViewModelFactory(): ViewModelFactory<HomeViewModel>
+
+    fun cardRegisterViewModelFactory(): ViewModelFactory<CardRegisterViewModel>
 }

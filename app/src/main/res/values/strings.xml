@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">PicPay</string>
+    <string name="card_register_title">Cadastrar cartão</string>
+    <string name="card_register_number_hint">Número do cartão</string>
+    <string name="card_register_name_hint">Nome do titular</string>
+    <string name="card_register_cvv_hint">CVV</string>
+    <string name="card_register_expiration_hint">Vencimento</string>
+    <string name="card_register_save_button">Salvar</string>
 </resources>
