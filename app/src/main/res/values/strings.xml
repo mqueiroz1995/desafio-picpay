@@ -6,4 +6,7 @@
     <string name="card_register_cvv_hint">CVV</string>
     <string name="card_register_expiration_hint">Vencimento</string>
     <string name="card_register_save_button">Salvar</string>
+    <string name="card_register_priming_title">Cadastre um cartão\nde crédito</string>
+    <string name="card_register_priming_content">Para fazer pagamentos para outras\npessoas você precisa cadastrar\num cartão de crédito pessoal.</string>
+    <string name="card_register_priming_button">Cadastrar cartão</string>
 </resources>
