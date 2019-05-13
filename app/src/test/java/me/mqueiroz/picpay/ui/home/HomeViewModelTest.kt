@@ -1,4 +1,4 @@
-package me.mqueiroz.picpay
+package me.mqueiroz.picpay.ui.home
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
@@ -7,8 +7,6 @@ import com.nhaarman.mockitokotlin2.mock
 import io.reactivex.Observable
 import me.mqueiroz.picpay.common.entities.User
 import me.mqueiroz.picpay.model.Repository
-import me.mqueiroz.picpay.ui.home.HomeFragmentState
-import me.mqueiroz.picpay.ui.home.HomeViewModel
 import me.mqueiroz.picpay.utils.schedulers.TrampolineSchedulerProvider
 import org.junit.After
 import org.junit.Before
@@ -42,11 +40,11 @@ class HomeViewModelTest {
     fun loadUsers_ShouldSetLoadedState_onNext() {
         // given
         val users = listOf(
-            User("User1"),
-            User("User2"),
-            User("User3"),
-            User("User4"),
-            User("User5")
+            User("img_0", "name_0", 0, "username_0"),
+            User("img_1", "name_1", 1, "username_1"),
+            User("img_2", "name_2", 2, "username_2"),
+            User("img_3", "name_3", 3, "username_3"),
+            User("img_4", "name_4", 4, "username_4")
         )
         `when`(repository.getUsers()).thenReturn(Observable.just(users))
 

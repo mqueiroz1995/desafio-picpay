@@ -121,7 +121,7 @@
 
     <Button
         android:id="@+id/card_register_save_button"
-        style="@style/EnabledButton"
+        style="@style/PicPayButton"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginStart="24dp"

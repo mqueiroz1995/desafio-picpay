@@ -6,6 +6,7 @@ import dagger.Component
 import me.mqueiroz.picpay.di.modules.NetworkModule
 import me.mqueiroz.picpay.di.modules.RepositoryModule
 import me.mqueiroz.picpay.di.modules.RxModule
+import me.mqueiroz.picpay.di.modules.UtilsModule
 import me.mqueiroz.picpay.ui.SharedViewModel
 import me.mqueiroz.picpay.ui.card.register.CardRegisterViewModel
 import me.mqueiroz.picpay.ui.home.HomeViewModel
@@ -18,7 +19,8 @@ import javax.inject.Singleton
         modules = [
             RepositoryModule::class,
             NetworkModule::class,
-            RxModule::class
+            RxModule::class,
+            UtilsModule::class
         ]
 )
 interface ApplicationComponent {

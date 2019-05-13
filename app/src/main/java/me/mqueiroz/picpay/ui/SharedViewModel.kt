@@ -16,7 +16,12 @@ class SharedViewModel @Inject constructor() : ViewModel() {
     val card: LiveData<Card> = mCard
 
     init {
-        mPayee.value = User("http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png", "Matheus", 1021, "mqueiroz")
-        mCard.value = Card(123, "21312321313", "05/11", 12.50)
+        mPayee.value = User(
+            "http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png",
+            "Matheus",
+            1021,
+            "mqueiroz"
+        )
+        mCard.value = Card("TESTE", "21312321313", 123, "05/11")
     }
 }
