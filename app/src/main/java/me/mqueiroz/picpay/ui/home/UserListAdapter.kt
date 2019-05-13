@@ -2,6 +2,7 @@ package me.mqueiroz.picpay.ui.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import me.mqueiroz.picpay.R
 import me.mqueiroz.picpay.common.entities.User
@@ -13,8 +14,9 @@ class UserListAdapter : RecyclerView.Adapter<UserListItemViewHolder>() {
 
     var users = emptyList<User>()
         set(value) {
+            val result = DiffUtil.calculateDiff(UserListDiffCallback(field, value))
+            result.dispatchUpdatesTo(this)
             field = value
-            notifyDataSetChanged()
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserListItemViewHolder {

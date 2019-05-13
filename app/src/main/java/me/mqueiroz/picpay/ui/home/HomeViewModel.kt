@@ -20,6 +20,8 @@ class HomeViewModel @Inject constructor(
 
     private val mState = MutableLiveData<HomeFragmentState>()
 
+    private var users = emptyList<User>()
+
     val state: LiveData<HomeFragmentState> = mState
 
     val navigate = SingleLiveEvent<HomeFragmentNavigation>()
@@ -30,9 +32,24 @@ class HomeViewModel @Inject constructor(
                 .observeOn(schedulerProvider.ui())
                 .doOnSubscribe { mState.value = HomeFragmentState.Loading }
                 .subscribe(
-                        { mState.value = HomeFragmentState.Loaded(it) },
+                        {
+                            mState.value = HomeFragmentState.Loaded(it)
+                            users = it
+                        },
                         { mState.value = HomeFragmentState.Error() })
                 .addTo(disposable)
+    }
+
+    fun onQueryChanged(query: String) {
+        if (mState.value is HomeFragmentState.Loaded) {
+            mState.value.let {
+                if (it is HomeFragmentState.Loaded) {
+                    mState.value = HomeFragmentState.Loaded(users.filter { user ->
+                        user.username.contains(query) || user.name.contains(query)
+                    })
+                }
+            }
+        }
     }
 
     fun onUserSelected(user: User) {

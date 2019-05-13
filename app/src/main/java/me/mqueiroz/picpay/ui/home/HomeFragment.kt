@@ -16,6 +16,7 @@ import me.mqueiroz.picpay.common.entities.Card
 import me.mqueiroz.picpay.common.entities.User
 import me.mqueiroz.picpay.di.injector
 import me.mqueiroz.picpay.utils.StringResource
+import me.mqueiroz.picpay.utils.addTextWatcher
 
 class HomeFragment : Fragment() {
 
@@ -71,6 +72,10 @@ class HomeFragment : Fragment() {
                 is HomeFragmentNavigation.PaymentScreen -> navigateToPayment(action.user, action.card)
             }
         })
+
+        home_search.addTextWatcher {
+            viewModel.onQueryChanged(it)
+        }
     }
 
     private fun onLoading() {
