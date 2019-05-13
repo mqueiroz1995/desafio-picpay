@@ -32,11 +32,11 @@ class PaymentFragment : Fragment() {
 
     private val viewModel: PaymentViewModel by lazy {
         ViewModelProviders
-                .of(this, injector.paymentViewModelFactory())
-                .get(PaymentViewModel::class.java)
+            .of(this, injector.paymentViewModelFactory())
+            .get(PaymentViewModel::class.java)
     }
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
 
         val user = args.user
@@ -112,17 +112,17 @@ class PaymentFragment : Fragment() {
     private fun loadPicture(url: String) {
         payment_picture_progress_bar.visibility = View.VISIBLE
         Picasso.get()
-                .load(url)
-                .error(R.drawable.ic_round_account_circle)
-                .into(payment_picture, object : Callback {
-                    override fun onSuccess() {
-                        payment_picture_progress_bar.visibility = View.GONE
-                    }
+            .load(url)
+            .error(R.drawable.ic_round_account_circle)
+            .into(payment_picture, object : Callback {
+                override fun onSuccess() {
+                    payment_picture_progress_bar.visibility = View.GONE
+                }
 
-                    override fun onError(e: Exception?) {
-                        payment_picture_progress_bar.visibility = View.GONE
-                    }
-                })
+                override fun onError(e: Exception?) {
+                    payment_picture_progress_bar.visibility = View.GONE
+                }
+            })
     }
 
     private fun setEnabled(enabled: Boolean) {
@@ -148,13 +148,13 @@ class PaymentFragment : Fragment() {
 
     private fun navigateToHomeScreen(receipt: Receipt) {
         val action = PaymentFragmentDirections
-                .actionPaymentFragmentToHomeFragment(receipt)
+            .actionPaymentFragmentToHomeFragment(receipt, args.card)
         findNavController().navigate(action)
     }
 
     private fun navigateToCardRegisterScreen() {
         val action = PaymentFragmentDirections
-                .actionPaymentFragmentToCardRegisterFragment(args.user, args.card)
+            .actionPaymentFragmentToCardRegisterFragment(args.user, args.card)
         findNavController().navigate(action)
     }
 }

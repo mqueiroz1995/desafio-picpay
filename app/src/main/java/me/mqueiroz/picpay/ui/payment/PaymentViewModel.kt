@@ -58,7 +58,13 @@ class PaymentViewModel @Inject constructor(
                 .observeOn(schedulerProvider.ui())
                 .doOnSubscribe { mState.value = PaymentFragmentState.ProcessingPayment }
                 .subscribe(
-                        { receipt -> mState.value = PaymentFragmentState.PaymentSuccess(receipt) },
+                        { receipt ->
+//                            if (receipt.success) {
+                                mState.value = PaymentFragmentState.PaymentSuccess(receipt)
+//                            } else {
+                                // TODO:
+//                            }
+                        },
                         { mState.value = PaymentFragmentState.PaymentError() })
                 .addTo(disposable)
     }

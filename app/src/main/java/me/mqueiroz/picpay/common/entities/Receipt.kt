@@ -22,7 +22,7 @@ data class Receipt(
     val value: Double,
 
     @Json(name = "timestamp")
-    val timestamp: Int,
+    val timestamp: Long,
 
     @Json(name = "status")
     val status: String

@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_home.*
 import me.mqueiroz.picpay.R
 import me.mqueiroz.picpay.common.entities.Card
+import me.mqueiroz.picpay.common.entities.Receipt
 import me.mqueiroz.picpay.common.entities.User
 import me.mqueiroz.picpay.di.injector
 import me.mqueiroz.picpay.utils.StringResource
@@ -46,6 +47,10 @@ class HomeFragment : Fragment() {
         initializeRecyclerView()
 
         bindViewModel()
+
+        args.receipt?.let { receipt ->
+            showReceiptDialog(receipt, args.card!!)
+        }
     }
 
     private fun initializeRecyclerView() {
@@ -79,11 +84,11 @@ class HomeFragment : Fragment() {
     }
 
     private fun onLoading() {
-        // TODO: implement
+        // TODO:
     }
 
     private fun onError(message: StringResource) {
-        // TODO: implement
+        // TODO:
     }
 
     private fun onLoaded(users: List<User>) {
@@ -100,6 +105,12 @@ class HomeFragment : Fragment() {
     private fun navigateToPayment(user: User, card: Card) {
         val action = HomeFragmentDirections
                 .actionHomeFragmentToPaymentFragment(user, card)
+        findNavController().navigate(action)
+    }
+
+    private fun showReceiptDialog(receipt: Receipt, card: Card) {
+        val action = HomeFragmentDirections
+                .actionHomeFragmentToReceiptDialog(receipt, card)
         findNavController().navigate(action)
     }
 }

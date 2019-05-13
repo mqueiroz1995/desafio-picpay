@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">PicPay</string>
     <string name="home_title">Contatos</string>
+    <string name="home_search_hint">A quem você deseja pagar?</string>
     <string name="card_register_title">Cadastrar cartão</string>
     <string name="card_register_number_hint">Número do cartão</string>
     <string name="card_register_name_hint">Nome do titular</string>
@@ -15,5 +16,10 @@
     <string name="payment_value_hint">0,00</string>
     <string name="payment_currency">R$</string>
     <string name="payment_credit_card">**** **** **** %1$s</string>
-    <string name="home_search_hint">A quem você deseja pagar?</string>
+    <string name="receipt_title">Recibo</string>
+    <string name="receipt_id">Transação %1$d</string>
+    <string name="receipt_credit_card">Cartão **** **** **** %1$s</string>
+    <string name="receipt_total_label">Total pago</string>
+    <string name="receipt_money">R$ %1$.2f</string>
+
 </resources>

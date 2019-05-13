@@ -21,6 +21,14 @@
             android:defaultValue="@null"
             app:argType="me.mqueiroz.picpay.common.entities.Receipt"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_homeFragment_to_receiptDialog"
+            app:destination="@id/receiptDialog" />
+        <argument
+            android:name="card"
+            android:defaultValue="@null"
+            app:argType="me.mqueiroz.picpay.common.entities.Card"
+            app:nullable="true" />
     </fragment>
 
     <fragment
@@ -73,5 +81,16 @@
             android:id="@+id/action_paymentFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
-
+    <dialog
+        android:id="@+id/receiptDialog"
+        android:name="me.mqueiroz.picpay.ui.receipt.ReceiptDialog"
+        android:label="ReceiptDialog"
+        tools:layout="@layout/dialog_receipt">
+        <argument
+            android:name="receipt"
+            app:argType="me.mqueiroz.picpay.common.entities.Receipt" />
+        <argument
+            android:name="card"
+            app:argType="me.mqueiroz.picpay.common.entities.Card" />
+    </dialog>
 </navigation>
