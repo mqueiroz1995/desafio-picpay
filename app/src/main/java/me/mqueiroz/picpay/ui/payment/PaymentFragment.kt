@@ -74,6 +74,10 @@ class PaymentFragment : Fragment() {
             }
         })
 
+        payment_edit_card_button.setOnClickListener {
+            navigateToCardRegisterScreen()
+        }
+
         payment_button.setOnClickListener {
             viewModel.onClickPay()
         }
@@ -101,7 +105,7 @@ class PaymentFragment : Fragment() {
     private fun bindCard() {
         viewModel.card.observe(this, Observer {
             val cardEnding = it.number.substring(it.number.length - 4)
-            payment_card.text = "X X X $cardEnding"
+            payment_card.text = getString(R.string.payment_credit_card, cardEnding)
         })
     }
 
@@ -135,15 +139,22 @@ class PaymentFragment : Fragment() {
     }
 
     private fun onSuccess(receipt: Receipt) {
-        setEnabled(false)
-        val action = PaymentFragmentDirections
-                .actionPaymentFragmentToHomeFragment(receipt)
-        findNavController().navigate(action)
-
+        navigateToHomeScreen(receipt)
     }
 
     private fun onError(message: StringResource) {
-        setEnabled(true)
         Snackbar.make(fragment_payment_root, getString(message.id), Snackbar.LENGTH_LONG).show()
+    }
+
+    private fun navigateToHomeScreen(receipt: Receipt) {
+        val action = PaymentFragmentDirections
+                .actionPaymentFragmentToHomeFragment(receipt)
+        findNavController().navigate(action)
+    }
+
+    private fun navigateToCardRegisterScreen() {
+        val action = PaymentFragmentDirections
+                .actionPaymentFragmentToCardRegisterFragment(args.user, args.card)
+        findNavController().navigate(action)
     }
 }

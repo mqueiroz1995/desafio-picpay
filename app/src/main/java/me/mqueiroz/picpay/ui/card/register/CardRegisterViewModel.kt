@@ -31,7 +31,7 @@ class CardRegisterViewModel @Inject constructor(
     private var cvv = ""
 
     val state: LiveData<CardRegisterFragmentState> = mState
-
+    
     fun onCardNumberChanged(number: String) {
         cardNumber = number
         isCardNumberValid = Pattern.matches("^[0-9]*\$", number) && number.length == 16

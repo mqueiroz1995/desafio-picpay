@@ -58,6 +58,15 @@ class CardRegisterFragment : Fragment() {
         card_register_save_button.setOnClickListener {
             viewModel.onClickSave()
         }
+
+        args.card?.let { loadCard(it) }
+    }
+
+    private fun loadCard(card: Card) {
+        card_register_number_input.text = card.number.toEditable()
+        card_register_name_input.text = card.name.toEditable()
+        card_register_expiration_input.text = card.expiryDate.toEditable()
+        card_register_cvv_input.text = card.cvv.toString().toEditable()
     }
 
     private fun onEnable() {
@@ -77,6 +86,8 @@ class CardRegisterFragment : Fragment() {
     private fun onError() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
+
+    private fun String.toEditable(): Editable = Editable.Factory.getInstance().newEditable(this)
 
     private fun EditText.addTextWatcher(listener: (String) -> Unit) {
         this.addTextChangedListener(object : TextWatcher {
