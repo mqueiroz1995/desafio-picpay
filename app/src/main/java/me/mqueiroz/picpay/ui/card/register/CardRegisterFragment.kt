@@ -16,9 +16,13 @@ import me.mqueiroz.picpay.R
 import me.mqueiroz.picpay.di.injector
 import com.redmadrobot.inputmask.MaskedTextChangedListener
 import androidx.annotation.NonNull
+import androidx.navigation.fragment.navArgs
+import me.mqueiroz.picpay.common.entities.Card
 
 
 class CardRegisterFragment : Fragment() {
+
+    private val args: CardRegisterFragmentArgs by navArgs()
 
     private val viewModel: CardRegisterViewModel by lazy {
         ViewModelProviders
@@ -34,7 +38,7 @@ class CardRegisterFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         toolbar.setNavigationOnClickListener {
-            activity?.onBackPressed()
+            findNavController().navigateUp()
         }
 
         card_register_number_input.addMaskedTextWatcher("[0000] [0000] [0000] [0000]", viewModel::onCardNumberChanged)
@@ -46,7 +50,8 @@ class CardRegisterFragment : Fragment() {
             when (state) {
                 is CardRegisterFragmentState.SaveDisabled -> onDisable()
                 is CardRegisterFragmentState.SaveEnabled -> onEnable()
-                is CardRegisterFragmentState.Success -> onSuccess()
+                is CardRegisterFragmentState.Success -> onSuccess(state.card)
+                is CardRegisterFragmentState.Error -> onError()
             }
         })
 
@@ -63,11 +68,17 @@ class CardRegisterFragment : Fragment() {
         card_register_save_button.visibility = View.GONE
     }
 
-    private fun onSuccess() {
-        findNavController().navigate(R.id.action_cardRegisterFragment_to_paymentFragment)
+    private fun onSuccess(card: Card) {
+        val action = CardRegisterFragmentDirections
+                .actionCardRegisterFragmentToPaymentFragment(args.user, card)
+        findNavController().navigate(action)
     }
 
-    fun EditText.addTextWatcher(listener: (String) -> Unit) {
+    private fun onError() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    private fun EditText.addTextWatcher(listener: (String) -> Unit) {
         this.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 listener(s.toString())

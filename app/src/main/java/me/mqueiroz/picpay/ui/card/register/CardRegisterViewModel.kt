@@ -74,7 +74,7 @@ class CardRegisterViewModel @Inject constructor(
         repository.saveCard(card)
                 .subscribeOn(schedulerProvider.io())
                 .observeOn(schedulerProvider.ui())
-                .subscribe({ mState.value = CardRegisterFragmentState.Success },
+                .subscribe({ mState.value = CardRegisterFragmentState.Success(card) },
                         { mState.value = CardRegisterFragmentState.Error }
                 )
                 .addTo(disposable)

@@ -1,6 +1,7 @@
 package me.mqueiroz.picpay.model
 
 import io.reactivex.Completable
+import io.reactivex.Maybe
 import io.reactivex.Observable
 import io.reactivex.Single
 import me.mqueiroz.picpay.common.entities.Card
@@ -23,8 +24,8 @@ class RepositoryImpl @Inject constructor(
         return picPayService.getUsers().toObservable()
     }
 
-    override fun getCard(): Observable<Card> {
-        return cardStorage.get().toObservable()
+    override fun getCard(): Maybe<Card> {
+        return cardStorage.get()
     }
 
     override fun saveCard(card: Card): Completable {

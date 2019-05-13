@@ -1,6 +1,7 @@
 package me.mqueiroz.picpay.model
 
 import io.reactivex.Completable
+import io.reactivex.Maybe
 import io.reactivex.Observable
 import io.reactivex.Single
 import me.mqueiroz.picpay.common.entities.Card
@@ -12,7 +13,7 @@ interface Repository {
 
     fun getUsers(): Observable<List<User>>
 
-    fun getCard(): Observable<Card>
+    fun getCard(): Maybe<Card>
 
     fun saveCard(card: Card): Completable
 

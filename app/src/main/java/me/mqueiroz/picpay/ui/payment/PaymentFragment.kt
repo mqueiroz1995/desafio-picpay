@@ -11,15 +11,16 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_payment.*
 import kotlinx.android.synthetic.main.fragment_payment.toolbar
 import me.mqueiroz.picpay.R
+import me.mqueiroz.picpay.common.entities.Receipt
 import me.mqueiroz.picpay.di.injector
-import me.mqueiroz.picpay.ui.MainActivity
-import me.mqueiroz.picpay.ui.SharedViewModel
 import java.lang.Exception
 import me.mqueiroz.picpay.utils.CurrencyTextWatcher
 import me.mqueiroz.picpay.utils.StringResource
@@ -27,24 +28,20 @@ import me.mqueiroz.picpay.utils.StringResource
 
 class PaymentFragment : Fragment() {
 
+    private val args: PaymentFragmentArgs by navArgs()
+
     private val viewModel: PaymentViewModel by lazy {
         ViewModelProviders
                 .of(this, injector.paymentViewModelFactory())
                 .get(PaymentViewModel::class.java)
     }
 
-    private lateinit var sharedViewModel: SharedViewModel
-
     override fun onAttach(context: Context?) {
         super.onAttach(context)
 
-        sharedViewModel = ViewModelProviders
-                .of((context as MainActivity), injector.sharedViewModelFactory())
-                .get(SharedViewModel::class.java)
-
-        val payee = sharedViewModel.payee.value!!
-        val card = sharedViewModel.card.value!!
-        viewModel.setState(payee, card)
+        val user = args.user
+        val card = args.card
+        viewModel.setState(user, card)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -55,7 +52,7 @@ class PaymentFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         toolbar.setNavigationOnClickListener {
-            activity?.onBackPressed()
+            findNavController().navigateUp()
         }
 
         payment_value.addTextChangedListener(CurrencyTextWatcher(payment_value))
@@ -72,7 +69,7 @@ class PaymentFragment : Fragment() {
                 is PaymentFragmentState.PaymentDisabled -> setEnabled(false)
                 is PaymentFragmentState.PaymentEnabled -> setEnabled(true)
                 is PaymentFragmentState.ProcessingPayment -> setProcessing(true)
-                is PaymentFragmentState.PaymentSuccess -> onSuccess()
+                is PaymentFragmentState.PaymentSuccess -> onSuccess(state.receipt)
                 is PaymentFragmentState.PaymentError -> onError(state.message)
             }
         })
@@ -137,8 +134,12 @@ class PaymentFragment : Fragment() {
 
     }
 
-    private fun onSuccess() {
+    private fun onSuccess(receipt: Receipt) {
         setEnabled(false)
+        val action = PaymentFragmentDirections
+                .actionPaymentFragmentToHomeFragment(receipt)
+        findNavController().navigate(action)
+
     }
 
     private fun onError(message: StringResource) {

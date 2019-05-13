@@ -2,9 +2,12 @@ package me.mqueiroz.picpay.ui.home
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
+import com.nhaarman.mockitokotlin2.anyOrNull
 import com.nhaarman.mockitokotlin2.inOrder
 import com.nhaarman.mockitokotlin2.mock
+import io.reactivex.Maybe
 import io.reactivex.Observable
+import me.mqueiroz.picpay.common.entities.Card
 import me.mqueiroz.picpay.common.entities.User
 import me.mqueiroz.picpay.model.Repository
 import me.mqueiroz.picpay.utils.schedulers.TrampolineSchedulerProvider
@@ -30,21 +33,23 @@ class HomeViewModelTest {
     private val viewModel = HomeViewModel(repository, schedulerProvider)
 
     private val stateObserver = mock<Observer<HomeFragmentState>>()
+    private val navigationObserver = mock<Observer<HomeFragmentNavigation>>()
 
     @Before
     fun setUp() {
         viewModel.state.observeForever(stateObserver)
+        viewModel.navigate.observeForever(navigationObserver)
     }
 
     @Test
     fun loadUsers_ShouldSetLoadedState_onNext() {
         // given
         val users = listOf(
-            User("img_0", "name_0", 0, "username_0"),
-            User("img_1", "name_1", 1, "username_1"),
-            User("img_2", "name_2", 2, "username_2"),
-            User("img_3", "name_3", 3, "username_3"),
-            User("img_4", "name_4", 4, "username_4")
+                User("img_0", "name_0", 0, "username_0"),
+                User("img_1", "name_1", 1, "username_1"),
+                User("img_2", "name_2", 2, "username_2"),
+                User("img_3", "name_3", 3, "username_3"),
+                User("img_4", "name_4", 4, "username_4")
         )
         `when`(repository.getUsers()).thenReturn(Observable.just(users))
 
@@ -76,8 +81,36 @@ class HomeViewModelTest {
         }
     }
 
+    @Test
+    fun onUserSelected_ShouldNavigateToPayment_WhenCardIsAvailable() {
+        // give
+        val user = User("img", "name", 0, "username")
+        val card = Card("name", "0000", 0, "11/22")
+        `when`(repository.getCard()).thenReturn(Maybe.just(card))
+
+        // when
+        viewModel.onUserSelected(user)
+
+        // then
+        verify(navigationObserver).onChanged(HomeFragmentNavigation.PaymentScreen(user, card))
+    }
+
+    @Test
+    fun onUserSelected_ShouldNavigateToCardPriming_WhenCardIsUnavailable() {
+        // give
+        val user = User("img", "name", 0, "username")
+        `when`(repository.getCard()).thenReturn(Maybe.empty())
+
+        // when
+        viewModel.onUserSelected(user)
+
+        // then
+        verify(navigationObserver).onChanged(HomeFragmentNavigation.CardPrimingScreen(user))
+    }
+
     @After
     fun tearDown() {
         viewModel.state.removeObserver(stateObserver)
+        viewModel.navigate.removeObserver(navigationObserver)
     }
 }

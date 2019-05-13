@@ -2,6 +2,7 @@ package me.mqueiroz.picpay.ui.card.register
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
+import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.anyOrNull
 import com.nhaarman.mockitokotlin2.mock
 import io.reactivex.Completable
@@ -41,7 +42,7 @@ class CardRegisterViewModelTest {
         viewModel.onClickSave()
 
         // then
-        verify(stateObserver).onChanged(CardRegisterFragmentState.Success)
+        verify(stateObserver).onChanged(CardRegisterFragmentState.Success(any()))
         viewModel.state.removeObserver(stateObserver)
     }
 

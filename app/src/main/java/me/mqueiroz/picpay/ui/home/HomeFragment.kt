@@ -4,18 +4,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_home.*
 import me.mqueiroz.picpay.R
+import me.mqueiroz.picpay.common.entities.Card
 import me.mqueiroz.picpay.common.entities.User
 import me.mqueiroz.picpay.di.injector
 import me.mqueiroz.picpay.utils.StringResource
 
 class HomeFragment : Fragment() {
+
+    private val args: HomeFragmentArgs by navArgs()
 
     private val viewModel: HomeViewModel by lazy {
         ViewModelProviders
@@ -46,9 +50,7 @@ class HomeFragment : Fragment() {
     private fun initializeRecyclerView() {
         adapter = UserListAdapter()
         recyclerView.adapter = adapter
-        adapter.onItemClickListener.observe(this, Observer {
-            Toast.makeText(context, it.name, Toast.LENGTH_SHORT).show()
-        })
+        adapter.onItemClickListener.observe(this, Observer { viewModel.onUserSelected(it) })
 
         val layoutManager = LinearLayoutManager(context)
         recyclerView.layoutManager = layoutManager
@@ -60,6 +62,13 @@ class HomeFragment : Fragment() {
                 is HomeFragmentState.Loading -> onLoading()
                 is HomeFragmentState.Error -> onError(state.message)
                 is HomeFragmentState.Loaded -> onLoaded(state.users)
+            }
+        })
+
+        viewModel.navigate.observe(this, Observer { action ->
+            when (action) {
+                is HomeFragmentNavigation.CardPrimingScreen -> navigateToCardPriming(action.user)
+                is HomeFragmentNavigation.PaymentScreen -> navigateToPayment(action.user, action.card)
             }
         })
     }
@@ -74,5 +83,18 @@ class HomeFragment : Fragment() {
 
     private fun onLoaded(users: List<User>) {
         adapter.users = users
+    }
+
+    private fun navigateToCardPriming(user: User) {
+        val action = HomeFragmentDirections
+                .actionHomeFragmentToCardRegisterPrimingFragment(user)
+        findNavController().navigate(action)
+
+    }
+
+    private fun navigateToPayment(user: User, card: Card) {
+        val action = HomeFragmentDirections
+                .actionHomeFragmentToPaymentFragment(user, card)
+        findNavController().navigate(action)
     }
 }
