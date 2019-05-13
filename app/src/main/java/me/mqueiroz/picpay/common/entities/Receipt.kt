@@ -1,8 +1,11 @@
 package me.mqueiroz.picpay.common.entities
 
+import android.os.Parcelable
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 @JsonClass(generateAdapter = true)
 data class Receipt(
 
@@ -23,4 +26,4 @@ data class Receipt(
 
     @Json(name = "status")
     val status: String
-)
+) : Parcelable
