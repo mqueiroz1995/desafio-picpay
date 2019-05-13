@@ -21,5 +21,6 @@
     <string name="receipt_credit_card">Cartão **** **** **** %1$s</string>
     <string name="receipt_total_label">Total pago</string>
     <string name="receipt_money">R$ %1$.2f</string>
+    <string name="error">Ocorreu um erro. Tente novamente.</string>
 
 </resources>

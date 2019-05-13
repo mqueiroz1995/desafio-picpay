@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_home.*
 import me.mqueiroz.picpay.R
 import me.mqueiroz.picpay.common.entities.Card
@@ -84,14 +85,16 @@ class HomeFragment : Fragment() {
     }
 
     private fun onLoading() {
-        // TODO:
+        user_list_progress_bar.visibility = View.VISIBLE
     }
 
     private fun onError(message: StringResource) {
-        // TODO:
+        user_list_progress_bar.visibility = View.GONE
+        Snackbar.make(fragment_home_root, getString(message.id), Snackbar.LENGTH_SHORT).show()
     }
 
     private fun onLoaded(users: List<User>) {
+        user_list_progress_bar.visibility = View.GONE
         adapter.users = users
     }
 
@@ -99,7 +102,6 @@ class HomeFragment : Fragment() {
         val action = HomeFragmentDirections
                 .actionHomeFragmentToCardRegisterPrimingFragment(user)
         findNavController().navigate(action)
-
     }
 
     private fun navigateToPayment(user: User, card: Card) {

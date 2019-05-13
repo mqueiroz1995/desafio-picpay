@@ -10,5 +10,6 @@ sealed class PaymentFragmentState {
     object PaymentEnabled : PaymentFragmentState()
     object ProcessingPayment : PaymentFragmentState()
     data class PaymentSuccess(val receipt: Receipt) : PaymentFragmentState()
+    data class PaymentFailed(val message: StringResource = StringResource.defaultError()) : PaymentFragmentState()
     data class PaymentError(val message: StringResource = StringResource.defaultError()) : PaymentFragmentState()
 }

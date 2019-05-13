@@ -32,8 +32,8 @@ class PaymentFragment : Fragment() {
 
     private val viewModel: PaymentViewModel by lazy {
         ViewModelProviders
-            .of(this, injector.paymentViewModelFactory())
-            .get(PaymentViewModel::class.java)
+                .of(this, injector.paymentViewModelFactory())
+                .get(PaymentViewModel::class.java)
     }
 
     override fun onAttach(context: Context) {
@@ -70,6 +70,7 @@ class PaymentFragment : Fragment() {
                 is PaymentFragmentState.PaymentEnabled -> setEnabled(true)
                 is PaymentFragmentState.ProcessingPayment -> setProcessing(true)
                 is PaymentFragmentState.PaymentSuccess -> onSuccess(state.receipt)
+                is PaymentFragmentState.PaymentFailed -> onFailure(state.message)
                 is PaymentFragmentState.PaymentError -> onError(state.message)
             }
         })
@@ -112,17 +113,17 @@ class PaymentFragment : Fragment() {
     private fun loadPicture(url: String) {
         payment_picture_progress_bar.visibility = View.VISIBLE
         Picasso.get()
-            .load(url)
-            .error(R.drawable.ic_round_account_circle)
-            .into(payment_picture, object : Callback {
-                override fun onSuccess() {
-                    payment_picture_progress_bar.visibility = View.GONE
-                }
+                .load(url)
+                .error(R.drawable.ic_round_account_circle)
+                .into(payment_picture, object : Callback {
+                    override fun onSuccess() {
+                        payment_picture_progress_bar.visibility = View.GONE
+                    }
 
-                override fun onError(e: Exception?) {
-                    payment_picture_progress_bar.visibility = View.GONE
-                }
-            })
+                    override fun onError(e: Exception?) {
+                        payment_picture_progress_bar.visibility = View.GONE
+                    }
+                })
     }
 
     private fun setEnabled(enabled: Boolean) {
@@ -135,11 +136,15 @@ class PaymentFragment : Fragment() {
     }
 
     private fun setProcessing(isProcessing: Boolean) {
-
+        // TODO:
     }
 
     private fun onSuccess(receipt: Receipt) {
         navigateToHomeScreen(receipt)
+    }
+
+    private fun onFailure(message: StringResource) {
+        Snackbar.make(fragment_payment_root, getString(message.id), Snackbar.LENGTH_LONG).show()
     }
 
     private fun onError(message: StringResource) {
@@ -148,13 +153,13 @@ class PaymentFragment : Fragment() {
 
     private fun navigateToHomeScreen(receipt: Receipt) {
         val action = PaymentFragmentDirections
-            .actionPaymentFragmentToHomeFragment(receipt, args.card)
+                .actionPaymentFragmentToHomeFragment(receipt, args.card)
         findNavController().navigate(action)
     }
 
     private fun navigateToCardRegisterScreen() {
         val action = PaymentFragmentDirections
-            .actionPaymentFragmentToCardRegisterFragment(args.user, args.card)
+                .actionPaymentFragmentToCardRegisterFragment(args.user, args.card)
         findNavController().navigate(action)
     }
 }

@@ -59,11 +59,11 @@ class PaymentViewModel @Inject constructor(
                 .doOnSubscribe { mState.value = PaymentFragmentState.ProcessingPayment }
                 .subscribe(
                         { receipt ->
-//                            if (receipt.success) {
+                            if (receipt.success) {
                                 mState.value = PaymentFragmentState.PaymentSuccess(receipt)
-//                            } else {
-                                // TODO:
-//                            }
+                            } else {
+                                mState.value = PaymentFragmentState.PaymentFailed()
+                            }
                         },
                         { mState.value = PaymentFragmentState.PaymentError() })
                 .addTo(disposable)
