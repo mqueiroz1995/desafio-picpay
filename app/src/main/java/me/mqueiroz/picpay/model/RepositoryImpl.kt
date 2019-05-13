@@ -7,6 +7,7 @@ import me.mqueiroz.picpay.common.entities.Card
 import me.mqueiroz.picpay.common.entities.Transaction
 import me.mqueiroz.picpay.common.entities.Receipt
 import me.mqueiroz.picpay.common.entities.User
+import me.mqueiroz.picpay.model.local.CardStorage
 import me.mqueiroz.picpay.model.network.PicPayService
 import me.mqueiroz.picpay.model.network.PostTransactionRequestBody
 import javax.inject.Inject
@@ -14,7 +15,8 @@ import javax.inject.Singleton
 
 @Singleton
 class RepositoryImpl @Inject constructor(
-    private val picPayService: PicPayService
+        private val picPayService: PicPayService,
+        private val cardStorage: CardStorage
 ) : Repository {
 
     override fun getUsers(): Observable<List<User>> {
@@ -22,16 +24,16 @@ class RepositoryImpl @Inject constructor(
     }
 
     override fun getCard(): Observable<Card> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return cardStorage.get().toObservable()
     }
 
     override fun saveCard(card: Card): Completable {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return cardStorage.save(card)
     }
 
     override fun saveTransaction(transaction: Transaction): Single<Receipt> {
         val requestBody = PostTransactionRequestBody.fromTransaction(transaction)
         return picPayService.postTransaction(requestBody)
-            .map { response -> response.receipt }
+                .map { response -> response.receipt }
     }
 }

@@ -1,12 +1,10 @@
 package me.mqueiroz.picpay.di.components
 
 import android.content.Context
+import dagger.Binds
 import dagger.BindsInstance
 import dagger.Component
-import me.mqueiroz.picpay.di.modules.NetworkModule
-import me.mqueiroz.picpay.di.modules.RepositoryModule
-import me.mqueiroz.picpay.di.modules.RxModule
-import me.mqueiroz.picpay.di.modules.UtilsModule
+import me.mqueiroz.picpay.di.modules.*
 import me.mqueiroz.picpay.ui.SharedViewModel
 import me.mqueiroz.picpay.ui.card.register.CardRegisterViewModel
 import me.mqueiroz.picpay.ui.home.HomeViewModel
@@ -17,6 +15,7 @@ import javax.inject.Singleton
 @Singleton
 @Component(
         modules = [
+            AppModule::class,
             RepositoryModule::class,
             NetworkModule::class,
             RxModule::class,

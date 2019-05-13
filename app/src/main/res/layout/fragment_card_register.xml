@@ -49,8 +49,10 @@
             android:id="@+id/card_register_number_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:digits="0123456789 "
             android:hint="@string/card_register_number_hint"
-            android:inputType="textPersonName" />
+            android:inputType="number"
+            android:maxLength="19" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -71,7 +73,8 @@
             android:id="@+id/card_register_name_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/card_register_name_hint" />
+            android:hint="@string/card_register_name_hint"
+            android:inputType="textPersonName" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -92,8 +95,9 @@
             android:id="@+id/card_register_expiration_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="5"
-            android:hint="@string/card_register_expiration_hint" />
+            android:hint="@string/card_register_expiration_hint"
+            android:inputType="date"
+            android:maxLength="5" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -115,8 +119,9 @@
             android:id="@+id/card_register_cvv_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="3"
-            android:hint="@string/card_register_cvv_hint" />
+            android:hint="@string/card_register_cvv_hint"
+            android:inputType="number"
+            android:maxLength="3" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
@@ -130,6 +135,7 @@
         android:layout_marginRight="24dp"
         android:layout_marginBottom="16dp"
         android:text="@string/card_register_save_button"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
